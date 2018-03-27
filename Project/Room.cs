@@ -9,10 +9,15 @@ namespace CastleGrimtol.Project {
     }
     public string Name { get; set; }
     public string Description { get; set; }
-    public List<Item> Items { get; set; }
+    public List<Item> Items {get; set;} = new List<Item>();
+    public Dictionary<string, string> directions = new Dictionary<string, string>();
 
     public void UseItem (Item item) {
-      throw new System.NotImplementedException ();
+
+      
+    }
+    public void TakeItem(Item item) {
+
     }
   }
 }

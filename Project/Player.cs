@@ -6,6 +6,7 @@ namespace CastleGrimtol.Project {
       this.Score = score;
 
     }
+
     public int Score { get; set; }
     public List<Item> Inventory { get; set; }
   }

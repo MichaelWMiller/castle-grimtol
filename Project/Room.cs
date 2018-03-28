@@ -10,14 +10,17 @@ namespace CastleGrimtol.Project {
     public string Name { get; set; }
     public string Description { get; set; }
     public List<Item> Items {get; set;} = new List<Item>();
-    public Dictionary<string, string> directions = new Dictionary<string, string>();
+    public Dictionary<string, Room> directions = new Dictionary<string, Room>();
 
     public void UseItem (Item item) {
 
       
     }
-    public void TakeItem(Item item) {
 
+    public Item TakeItem(string itemName) {
+      var foundItem = Items.Find(i => i.Name == itemName);
+      Items.Remove(foundItem);
+      return foundItem;
     }
   }
 }

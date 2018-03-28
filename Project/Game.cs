@@ -11,7 +11,20 @@ namespace CastleGrimtol.Project {
     public void Reset () {
       bool gameOver = true;
     }
-
+public static SetupCurrentRoom(Game game, string uc) {
+  switch(uc.Substring(1,1))
+  {
+    case "d":
+      //see if current room and direction exist (loop?)
+      //need to a.  Take current room, direction, read dictionary value of next room
+      //set value of current room with next room
+      //draw description from Room list? dictionary?
+      //check for items, show "Items in room:  ", list item.draw on display if available
+      //prompt user, see if take or use item
+      //
+    break;
+  }
+}
     public void Setup () {
 
       //Set up rooms and descriptions
@@ -53,11 +66,12 @@ namespace CastleGrimtol.Project {
       cave4.directions.Add("east", cave3);
       cave4.directions.Add("north", cave1);
 
+      Room currentRoom = chasm;
       
+      
+ 
+     
 
-      // Dictionary
-
-      //TODO:  DRAW A MAP, INSTANTIATE DIRECTIONS, ITEM(S), GET THE STORY GOING.
       //TODO:  CONNECT THE DOTS, ETC.  DON'T FORGET WHAT DO YOU WANT TO DO ON EVERY SCREEN. INCLUDE QUIT WITH HELP, OPTIONS, 
 
     }
@@ -102,19 +116,32 @@ Mission: After you are kitted out, conduct the dive from the survey/research ves
     public void DrawHelp () {
       Console.Clear ();
       System.Console.WriteLine ($@"
-  HELP:  The Basic Features of the game:
+                      /~~~~~~~~~~~~~~~~~~~~~/
+                     / Surviving Vanuatu!  /
+                    /~~~~~~~~~~~~~~~~~~~~~/ 
 
-  - Go <Direction>` Moves the player from room to room
-    Directions: <N>orth, <S>outh, <E>ast, <W>est
-  - Use <ItemName>` Uses an item in a room or from your inventory
-  - Take <ItemName>` Places an item into the player inventory and removes it from the room
-  - Quit` Quits the Game
+              HELP:  The Basic Features of the game:
 
- - help` List of commands. Redraws this screen
- - look` Re-prints the room description
- - inventory` prints a list of the items in the players inventory
+      Use initial letters of each word. For example, 'Go East' you can type
+      'ge', 'GE', etc. at the user prompt at the bottom.
+	  
+	  User input can be one or two letters. First two letters are checked.
+
+    - <G>o <D>irection>` Moves the player from room to room, e.g. Go Down, type 'gd'
+          Directions: <N>orth, <S>outh, <E>ast, <W>est, <D>own
+	- <U>se <I>temName` Uses an item in a room or from your inventory
+		Possible items: <E>gg, <R>ed rag, <D>oughnut, 
+		
+	- <T>ake <ItemName>` Places an item into the player inventory, 
+		removes it from the room.  E.g., <T>ake <D>oughnut is 'TD'
+		
+	- <Q>uit` Quits the Game
+
+	- <H>elp` List of commands. Redraws this screen
+	- <L>ook` Re-prints the room description
+	- <I>nventory` prints a list of the items in the players inventory
  
-- When the player enters a room they get the room description
+		When the player enters a room they get the room description
 
   ");
     }
@@ -124,6 +151,7 @@ Mission: After you are kitted out, conduct the dive from the survey/research ves
   Make a move, Kid!__________  ");
     }
     public void UseItem (string itemName) {
+    
 
     }
     public Game (Room currentRoom, Player currentPlayer) {

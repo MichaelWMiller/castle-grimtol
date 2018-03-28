@@ -7,7 +7,7 @@ namespace CastleGrimtol.Project {
     public string ItemUsedDescription { get; set;}
     public string ItemNotUsedDescription{get;set;}
     public bool ItemUsed{get; set;}
-    public string Description { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public string Description { get; set; }
 
     public Item (string name, string description, string itemUsedDescription, string itemNotUsedDescription, bool itemUsed) {
       this.Name = name;

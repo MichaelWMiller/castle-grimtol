@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 
 namespace CastleGrimtol.Project {
   public class Room : IRoom {
@@ -12,15 +13,35 @@ namespace CastleGrimtol.Project {
     public List<Item> Items {get; set;} = new List<Item>();
     public Dictionary<string, Room> directions = new Dictionary<string, Room>();
 
-    public void UseItem (Item item) {
-
-      
+    public Item UseItem (string itemName) {
+    
+      Item useItem = Items.Find(i => i.Name == itemName);
+      if (useItem.ItemUsed)
+      {
+        System.Console.WriteLine($@"
+          Sorry, this item, the {useItem.Name},  has already been used...
+        ");
+      } else 
+      {
+        System.Console.WriteLine($@"
+          You decide to use the item {useItem.Name}.
+          
+          Action:  {useItem.ItemUsedDescription}
+        ");
+        useItem.ItemUsed = false;
+      }
+      return useItem;
     }
 
     public Item TakeItem(string itemName) {
-      var foundItem = Items.Find(i => i.Name == itemName);
-      Items.Remove(foundItem);
+      Item foundItem = Items.Find(i => i.Name == itemName);
+       System.Console.WriteLine ($@"
+            You have taken the item!
+            
+            {foundItem.Description}         
+                                    ");
+      
       return foundItem;
     }
-  }
+  } 
 }

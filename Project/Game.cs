@@ -9,7 +9,7 @@ namespace CastleGrimtol.Project {
     public Player CurrentPlayer { get; set; }
 
     public void Reset () {
-      bool gameOver = true;
+      //bool gameOver = true;
     }
 public void SetupCurrentRoom(string uc) {
   switch(uc.Substring(1,1))
@@ -30,6 +30,7 @@ public void SetupCurrentRoom(string uc) {
     public void Setup () {
 
       //Set up rooms and descriptions
+Player monty = new Player(0);
 
       Room chasm = new Room ("Chasm", "You are equipped for the long duration dive and are being lowered into inky blackness. Several minutes --and 40 feet into the dive with the stranded Cargador de Mar looming overhead--you glance down and see a phosphurescent glow below you getting brighter.");
       Room cave1 = new Room ("Cave 1", "The glow is stronger and you are lowered even with a coral cave opening 10 feet across.  You shine your light and notice a shine off of an egg-shaped artifact near the north cave wall.");
@@ -68,17 +69,14 @@ public void SetupCurrentRoom(string uc) {
       cave4.directions.Add("east", cave3);
       cave4.directions.Add("north", cave1);
 
-      Room currentRoom = chasm;
+      CurrentRoom = chasm;
+      CurrentPlayer = monty;
       
-      
- 
-     
-
-      //TODO:  CONNECT THE DOTS, ETC.  DON'T FORGET WHAT DO YOU WANT TO DO ON EVERY SCREEN. INCLUDE QUIT WITH HELP, OPTIONS, 
 
     }
     public void Intro () {
-      Console.Clear ();
+
+   
       System.Console.WriteLine ($@"
                       /~~~~~~~~~~~~~~~~~~~~~/
                      / Surviving Vanuatu!  /
@@ -132,7 +130,8 @@ Mission: After you are kitted out, conduct the dive from the survey/research ves
     - <G>o <D>irection>` Moves the player from room to room, e.g. Go Down, type 'gd'
           Directions: <N>orth, <S>outh, <E>ast, <W>est, <D>own
 	- <U>se <I>temName` Uses an item in a room or from your inventory
-		Possible items: <E>gg, <R>ed rag, <D>oughnut, 
+		Possible items: <E>gg, <R>ed rag, <D>oughnut.
+    Example: <U>se <E>gg ==> UE. 
 		
 	- <T>ake <ItemName>` Places an item into the player inventory, 
 		removes it from the room.  E.g., <T>ake <D>oughnut is 'TD'
@@ -156,11 +155,7 @@ Mission: After you are kitted out, conduct the dive from the survey/research ves
     
 
     }
-    public Game (Room currentRoom, Player currentPlayer) {
-      this.CurrentRoom = currentRoom;
-      this.CurrentPlayer = currentPlayer;
 
-    }
 
   }
 }

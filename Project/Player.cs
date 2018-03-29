@@ -2,12 +2,11 @@ using System.Collections.Generic;
 
 namespace CastleGrimtol.Project {
   public class Player : IPlayer {
-    public Player()
-    {
-    }
+    
 
     public Player (int score) {
-      this.Score = score;
+      Score = score;
+      Inventory = new List<Item>();
 
     }
 

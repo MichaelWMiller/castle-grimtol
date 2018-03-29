@@ -11,10 +11,12 @@ namespace CastleGrimtol.Project {
     public void Reset () {
       bool gameOver = true;
     }
-public static SetupCurrentRoom(Game game, string uc) {
+public void SetupCurrentRoom(string uc) {
   switch(uc.Substring(1,1))
   {
     case "d":
+    
+  
       //see if current room and direction exist (loop?)
       //need to a.  Take current room, direction, read dictionary value of next room
       //set value of current room with next room
@@ -30,7 +32,7 @@ public static SetupCurrentRoom(Game game, string uc) {
       //Set up rooms and descriptions
 
       Room chasm = new Room ("Chasm", "You are equipped for the long duration dive and are being lowered into inky blackness. Several minutes --and 40 feet into the dive with the stranded Cargador de Mar looming overhead--you glance down and see a phosphurescent glow below you getting brighter.");
-      Room cave1 = new Room ("Cave1", "The glow is stronger and you are lowered even with a coral cave opening 10 feet across.  You shine your light and notice a shine off of an egg-shaped artifact near the north cave wall.");
+      Room cave1 = new Room ("Cave 1", "The glow is stronger and you are lowered even with a coral cave opening 10 feet across.  You shine your light and notice a shine off of an egg-shaped artifact near the north cave wall.");
       Room cave2 = new Room ("Cave 2", "After the debris settles and your vision clears, you see a small opening ");
       Room cave3 = new Room ("Cave 3", "After the debris settles, your vision suddenly goes red.  You swipe at your face trying to clear your vision, then slap at your helmet.  The red cloud morphs into a cylinder with a sharp point and a hand-grip. The cave is otherwise empty about 20 feet in diameter.");
       Room cave4 = new Room ("Cave 4", "After stowing the red mercury stuff in your bag, you enter the room to see glowing crystals..diamonds!..arranged in the wall of the coral with points radially aimed at a glowing doughnut-shaped ring laying in the middle of the cave floor. ");

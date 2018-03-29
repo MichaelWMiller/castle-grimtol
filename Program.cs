@@ -9,25 +9,16 @@ namespace CastleGrimtol.Project {
             Game game = new Game ();
             Player currentPlayer = new Player ();
             Room currentRoom = game.CurrentRoom;
-            string curRoom = game.CurrentRoom;
-           
-           
-            //var egg = currentRoom.Items.Find (i => i.Name == "egg");
             currentPlayer.Score = 0;
-            //currentPlayer.Inventory.Add (egg);
             game.Setup ();
             game.Intro ();
 
-            // Show Help Screen <N>ext
-            // Then display 1st room, inside while loop with list of commands drawn, including quit...TODO work on this.
             while (!gameOver) {
                 Console.Clear ();
-
-                //    var i = 1;.
-
                 game.DrawHelp ();
                 game.Prompt ();
-                string userInput = Console.Read ().ToLower ();
+                string userInput = Console.Read ().ToString ().ToLower ();
+                var foundRoom = currentRoom;
                 switch (userInput) {
                     case "h":
                         Console.Clear ();
@@ -35,24 +26,54 @@ namespace CastleGrimtol.Project {
                         break;
                     case "gd":
                         Console.Clear ();
-                        //Figure this shit out... need to pass current room, 2-letter user choice.
-                        Game.SetupCurrentRoom (currentRoom, userInput);
+                        foundRoom = currentRoom.directions["down"];
+                        if (foundRoom == null) {
+                            System.Console.WriteLine ("Nothing here try again");
+                            game.DrawHelp ();
+                        } else {
+                            currentRoom = currentRoom.directions["down"];
+                            var desc = currentRoom.Description;
+                            System.Console.WriteLine ($"Description: {desc}");
+                            var egg = currentRoom.Items.Find (i => i.Name == "egg");
+
+                            System.Console.WriteLine ($"Item Description: {egg.Description}");
+
+                            game.Prompt ();
+                            userInput = Console.ReadLine ().ToString ().ToLower ();
+                            if (userInput == "ti") {
+                                currentPlayer.Inventory.Add (currentRoom.TakeItem (egg.Name));
+                                egg.ItemUsed = true;
+                                Console.Clear ();
+                                System.Console.WriteLine ($@"
+                                    You have taken the item!
+                           {egg.ItemUsedDescription}         
+                                    ");
+                            }
+                        }
                         break;
                     case "gn":
                         Console.Clear ();
-                        Game.SetupCurrentRoom (userInput);
+                        System.Console.WriteLine ("Nothing here try again");
+                        game.DrawHelp ();
+                        game.Prompt ();
                         break;
                     case "gs":
                         Console.Clear ();
-                        Game.SetupCurrentRoom (userInput);
+                        System.Console.WriteLine ("Nothing here try again");
+                        game.DrawHelp ();
+                        game.Prompt ();
                         break;
                     case "ge":
                         Console.Clear ();
-                        Game.SetupCurrentRoom (userInput);
+                        System.Console.WriteLine ("Nothing here try again");
+                        game.DrawHelp ();
+                        game.Prompt ();
                         break;
                     case "gw":
                         Console.Clear ();
-                        Game.SetupCurrentRoom (userInput);
+                        System.Console.WriteLine ("Nothing here try again");
+                        game.DrawHelp ();
+                        game.Prompt ();
                         break;
                     case "q":
                         game.Reset ();
@@ -61,10 +82,6 @@ namespace CastleGrimtol.Project {
                         game.DrawHelp ();
                         break;
                 }
-
-                System.Console.WriteLine ($@"
-                
-                ");
 
                 gameOver = true;
             }

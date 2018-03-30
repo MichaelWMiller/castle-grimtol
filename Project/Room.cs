@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 
 namespace CastleGrimtol.Project {
   public class Room : IRoom {
@@ -10,41 +10,39 @@ namespace CastleGrimtol.Project {
     }
     public string Name { get; set; }
     public string Description { get; set; }
-    public List<Item> Items {get; set;} = new List<Item>();
-    public Dictionary<string, Room> directions = new Dictionary<string, Room>();
+    public List<Item> Items { get; set; } = new List<Item> ();
+    public Dictionary<string, Room> directions = new Dictionary<string, Room> ();
 
     public Item UseItem (string itemName) {
-    
-      Item useItem = Items.Find(i => i.Name == itemName);
-      if (useItem.ItemUsed)
-      {
-        System.Console.WriteLine($@"
-          Sorry, this item, the {useItem.Name},  has already been used...
-        ");
-      } else 
-      {
-        System.Console.WriteLine($@"
-          You decide to use the item {useItem.Name}.
-          
-          Action:  {useItem.ItemUsedDescription}
-        ");
-        useItem.ItemUsed = false;
+      Item useItem = Items.Find (i => i.Name == itemName);
+      if (useItem != null) {
+        Items.Remove (useItem);
       }
       return useItem;
     }
 
-    public Item TakeItem(string itemName) {
-      Item foundItem = Items.Find(i => i.Name == itemName);
-      Console.Clear();
-       System.Console.WriteLine ($@"
+    public void GetDescription () {
+      System.Console.WriteLine($@"
+      -------------------------
+        {Name}
+      -------------------------
+      ");
+      System.Console.WriteLine (Description);     
+      System.Console.WriteLine("there are exits to the....");
+      System.Console.WriteLine (String.Join (", ", directions.Keys));
+
+    }
+
+    public Item TakeItem (string itemName) {
+      Item foundItem = Items.Find (i => i.Name == itemName);
+      Console.Clear ();
+      System.Console.WriteLine ($@"
             You have taken the item!
             
             {foundItem.Description}         
                                     ");
-      
-                                    
-      
+
       return foundItem;
     }
-  } 
+  }
 }

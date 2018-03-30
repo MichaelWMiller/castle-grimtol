@@ -7,37 +7,27 @@ namespace CastleGrimtol.Project {
 
     public Room CurrentRoom { get; set; }
     public Player CurrentPlayer { get; set; }
+    private List<Room> _rooms { get; set; } = new List<Room> ();
 
     public void Reset () {
-      
+
     }
-public void SetupCurrentRoom(string uc) {
-  switch(uc.Substring(1,1))
-  {
-    case "d":
-    
-  
-      //see if current room and direction exist (loop?)
-      //need to a.  Take current room, direction, read dictionary value of next room
-      //set value of current room with next room
-      //draw description from Room list? dictionary?
-      //check for items, show "Items in room:  ", list item.draw on display if available
-      //prompt user, see if take or use item
-      //
-    break;
-  }
-}
+
     public void Setup () {
 
       //Set up rooms and descriptions
-Player monty = new Player(0);
+      Player monty = new Player (0);
 
       Room chasm = new Room ("chasm", "You are equipped for the long duration dive and are being lowered into inky blackness. Several minutes --and 40 feet into the dive with the stranded Cargador de Mar looming overhead--you glance down and see a phosphurescent glow below you getting brighter.");
-      Room cave1 = new Room ("cave1", "The glow is stronger and you are lowered even with a coral cave opening 10 feet across with no other openings.  You shine your light and notice a shine off of an egg-shaped artifact near the north cave wall. If you want it, use <T>ake <E>gg.");
+      Room cave1 = new Room ("cave1", "The glow is stronger and you are lowered even with a coral cave opening 10 feet across with no other openings.  You shine your light and notice a shine off of an egg-shaped artifact near the north cave wall. If you want it, 'use egg'.");
       Room cave2 = new Room ("cave2", "After the debris settles and your vision clears, you see a small opening and decide to investigate.");
-      Room cave3 = new Room ("cave3", "After the debris settles, your vision suddenly goes red.  You swipe at your face trying to clear your vision, then slap at your helmet.  The red cloud morphs into a cylinder with a sharp point and a hand-grip. The cave is otherwise empty about 20 feet in diameter. If you want the object, use <T>ake <R>ag.");
-      Room cave4 = new Room ("cave4", "After stowing the red mercury stuff in your bag, you enter the room to see glowing crystals..diamonds!..arranged in the wall of the coral with points radially aimed at a glowing doughnut-shaped ring laying in the middle of the cave floor. If you want it, use <T>ake <D>oughnut.");
-
+      Room cave3 = new Room ("cave3", "After the debris settles, your vision suddenly goes red.  You swipe at your face trying to clear your vision, then slap at your helmet.  The red cloud morphs into a cylinder with a sharp point and a hand-grip. The cave is otherwise empty about 20 feet in diameter. If you want the object, 'use red_rag'.");
+      Room cave4 = new Room ("cave4", "After stowing the red mercury stuff in your bag, you enter the room to see glowing crystals..diamonds!..arranged in the wall of the coral with points radially aimed at a glowing doughnut-shaped ring laying in the middle of the cave floor. If you want it, 'use doughnut'.");
+      _rooms.Add (chasm);
+      _rooms.Add (cave1);
+      _rooms.Add (cave2);
+      _rooms.Add (cave3);
+      _rooms.Add (cave4);
       Item egg = new Item ("egg", "Chrome-plated egg-shape device with ...Buttons!",
         "You pick it up and turn it over in your hands. You accidentally brush one of the buttons and are knocked into the cave wall from an explosion that occurred to the north.",
         "You eye the object with interest but decide to leave it lay. Searching the cave there doesn't appear to be any other opening. Suddenly you hear a whine coming from the device and a rocking explosion pushes you back.  On the cave wall appears to be an opening a few feet across in front of you. The device is no where to be seen. You're facing North.",
@@ -50,7 +40,7 @@ Player monty = new Player(0);
 
       Item doughnut = new Item ("doughnut", "About 10 inches across, ring is 1.5 inches thick. Glows a neon light blue, pulsates.",
         "You reach down and examine the object.  While holding it firmly it glows more and pulls your whole body back through the cave rooms out the chasm and up to the waiting survey ship.  YOU FRICKING WIN!",
-        "Suddenly the diamonds in the wall appear to be extending their points...rapidly...sharply...and impale you. YOU DIE!",
+        "Suddenly the diamonds in the wall appear to be extending their points...rapidly...sharply...and impale you. YOU DIE! GAME OVER!",
         false);
 
       //chasm.Items.Add (egg);
@@ -59,40 +49,39 @@ Player monty = new Player(0);
       cave4.Items.Add (doughnut);
 
       //directions
-      chasm.directions.Add("down", cave1);
+      chasm.directions.Add ("down", cave1);
 
-      cave1.directions.Add("east", cave4);
-      cave1.directions.Add("west", chasm);
-      cave1.directions.Add("south", cave1);
-      cave1.directions.Add("north", cave2);
-      cave1.directions.Add("down", cave1);
+      //cave1.directions.Add ("east", cave4);
+     // cave1.directions.Add("up", chasm);
+      // cave1.directions.Add ("west", chasm);
+      // cave1.directions.Add ("south", cave1);
+      // cave1.directions.Add ("north", cave2);
+      //cave1.directions.Add ("down", cave1);
 
-      cave2.directions.Add("east", cave3);
-      cave2.directions.Add("west", cave2);
-      cave2.directions.Add("south", cave1);
-      cave2.directions.Add("north", cave2);
-      cave2.directions.Add("down", cave2);
-      
-      cave3.directions.Add("east", cave3);
-      cave3.directions.Add("west", cave2);
-      cave3.directions.Add("south", cave4);
-      cave3.directions.Add("north", cave3);
-      cave3.directions.Add("down", cave3);
+      cave2.directions.Add ("east", cave3);
+      cave2.directions.Add ("west", cave2);
+      //cave2.directions.Add ("south", cave1);
+      //cave2.directions.Add ("north", cave2);
+      //cave2.directions.Add ("down", cave2);
 
-      cave4.directions.Add("east", cave4);
-      cave4.directions.Add("west", cave1);
-      cave4.directions.Add("south", cave4);
-      cave4.directions.Add("north", cave3);
-      cave4.directions.Add("down", cave4);
+      //cave3.directions.Add ("east", cave3);
+      //cave3.directions.Add ("west", cave3);
+      cave3.directions.Add ("south", cave4);
+      //cave3.directions.Add ("north", cave3);
+      //cave3.directions.Add ("down", cave3);
+
+      // cave4.directions.Add ("east", cave4);
+      // cave4.directions.Add ("west", cave1);
+      // cave4.directions.Add ("south", cave4);
+      // cave4.directions.Add ("north", cave3);
+      // cave4.directions.Add ("down", cave4);
 
       CurrentRoom = chasm;
       CurrentPlayer = monty;
-      
 
     }
     public void Intro () {
 
-   
       System.Console.WriteLine ($@"
                       /~~~~~~~~~~~~~~~~~~~~~/
                      / Surviving Vanuatu!  /
@@ -130,48 +119,91 @@ Mission: After you are kitted out, conduct the dive from the survey/research ves
     }
 
     public void DrawHelp () {
-      
+
       System.Console.WriteLine ($@"
-                      /~~~~~~~~~~~~~~~~~~~~~/
-                     / Surviving Vanuatu!  /
-                    /~~~~~~~~~~~~~~~~~~~~~/ 
+                    /~~~~~~~~~~~~~~~~~~~~~/
+                   / Surviving Vanuatu!  /
+                  /~~~~~~~~~~~~~~~~~~~~~/ 
 
-              HELP:  The Basic Features of the game:
-
-      Use initial letters of each word. For example, 'Go East' you can type
-      'ge', 'GE', etc. at the user prompt at the bottom.
-	  
-	  User input can be one or two letters. First two letters are checked.
-
-    - <G>o <D>irection>` Moves the player from room to room, e.g. Go Down, type 'gd'
-          Directions: <N>orth, <S>outh, <E>ast, <W>est, <D>own
-	- <U>se <I>temName` Uses an item in a room or from your inventory
-		Possible items: <E>gg, <R>ed rag, <D>oughnut.
-    Example: <U>se <E>gg ==> UE. 
-		
-	- <T>ake <ItemName>` Places an item into the player inventory, 
-		removes it from the room.  E.g., <T>ake <D>oughnut is 'TD'
-		
-	- <Q>uit` Quits the Game
-
-	- <H>elp` List of commands. Redraws this screen
-	- <L>ook` Re-prints the room description
-	- <I>nventory` prints a list of the items in the players inventory
+    Commands available and their options:
+    - 'go' <direction>` Moves the player from room to room, e.g. Go Down, type 'gd'
+          Directions: 'north', 'south', 'east', 'west', 'down', 'up'
+				Available directions are shown in game play.
+				
+    -  'use <itemName>' Uses an item in a room or from your inventory
+		    Possible items: 'egg', 'red_rag', 'doughnut'
+		    Example: 'use egg' 
+	      Generally use items as they are presented.
+    -  'quit' ...  Quits the Game
+    -  'help' -  List of commands. Redraws this screen
+    -  'look' -  Re-prints the room description
+    -  'inventory' prints a list of the items in the players inventory
  
-		When the player enters a room they get the room description
-
+      When the player enters a room they get the room description
   ");
+   CurrentRoom.GetDescription();
     }
 
-    public void Prompt () {
+    public string Prompt () {
       System.Console.WriteLine ($@"
-  Make a move, Kid!__________  ");
+  Make a move, Kid!____");
+      return Console.ReadLine ().ToLower();
     }
     public void UseItem (string itemName) {
-    
+      var item = CurrentPlayer.Inventory.Find (i => i.Name == itemName);
+      item = item == null ? CurrentRoom.UseItem (itemName) : item;
+      if (item == null) {
+        System.Console.WriteLine ("sorry there is no " + itemName);
+        return;
+      }
+      if (item.ItemUsed) {
+        System.Console.WriteLine ($@"
+          Sorry, this item, the {item.Name},  has already been used...
+        ");
+      } else {
+        System.Console.WriteLine ($@"
+          You decide to use the item {item.Name}.
+          Action:  
+        ");
 
+         CurrentRoom.GetDescription();        
+        item.ItemUsed = false;
+      }
+      AlterRoom (item);
+    }
+    private void AlterRoom (Item item) {
+      if (item.Name == "egg" && CurrentRoom.Name == "cave1") {
+        System.Console.WriteLine (item.ItemUsedDescription);
+       CurrentRoom.directions.Add ("north", _rooms.Find (r => r.Name == "cave2"));
+      }
+      if (item.Name == "red_rag" && CurrentRoom.Name == "cave3")
+     { 
+       System.Console.WriteLine(item.ItemUsedDescription);
+      CurrentRoom.directions.Add("south", _rooms.Find (r => r.Name == "cave4"));
+     }
+     if (item.Name == "doughnut" && CurrentRoom.Name == "cave4")
+     {
+        System.Console.WriteLine(item.ItemUsedDescription);
+        System.Console.WriteLine($@"
+             /~~~~~~~~~~~~~~~~~~~~~~~~~~~/\
+            /     Y O U   W I N ! ! !   /~~\
+           /~~~~~~~~~~~~~~~~~~~~~~~~~~~/~~~~\
+           \                           \~~~~/
+            \   Thanks for Playing!     \~~/
+             \~~~~~~~~~~~~~~~~~~~~~~~~~~~\/
+
+");
+     }
     }
 
+    public void Go (string direction) {
+      if (CurrentRoom.directions.ContainsKey (direction)) {
+        CurrentRoom = CurrentRoom.directions[direction];
+        CurrentRoom.GetDescription();
+      } else {
+        System.Console.WriteLine ("you cant go that way...");
+      }
+    }
 
   }
 }

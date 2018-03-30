@@ -9,7 +9,7 @@ namespace CastleGrimtol.Project {
     public Player CurrentPlayer { get; set; }
 
     public void Reset () {
-      //bool gameOver = true;
+      
     }
 public void SetupCurrentRoom(string uc) {
   switch(uc.Substring(1,1))
@@ -32,15 +32,15 @@ public void SetupCurrentRoom(string uc) {
       //Set up rooms and descriptions
 Player monty = new Player(0);
 
-      Room chasm = new Room ("Chasm", "You are equipped for the long duration dive and are being lowered into inky blackness. Several minutes --and 40 feet into the dive with the stranded Cargador de Mar looming overhead--you glance down and see a phosphurescent glow below you getting brighter.");
-      Room cave1 = new Room ("Cave 1", "The glow is stronger and you are lowered even with a coral cave opening 10 feet across.  You shine your light and notice a shine off of an egg-shaped artifact near the north cave wall.");
-      Room cave2 = new Room ("Cave 2", "After the debris settles and your vision clears, you see a small opening ");
-      Room cave3 = new Room ("Cave 3", "After the debris settles, your vision suddenly goes red.  You swipe at your face trying to clear your vision, then slap at your helmet.  The red cloud morphs into a cylinder with a sharp point and a hand-grip. The cave is otherwise empty about 20 feet in diameter.");
-      Room cave4 = new Room ("Cave 4", "After stowing the red mercury stuff in your bag, you enter the room to see glowing crystals..diamonds!..arranged in the wall of the coral with points radially aimed at a glowing doughnut-shaped ring laying in the middle of the cave floor. ");
+      Room chasm = new Room ("chasm", "You are equipped for the long duration dive and are being lowered into inky blackness. Several minutes --and 40 feet into the dive with the stranded Cargador de Mar looming overhead--you glance down and see a phosphurescent glow below you getting brighter.");
+      Room cave1 = new Room ("cave1", "The glow is stronger and you are lowered even with a coral cave opening 10 feet across with no other openings.  You shine your light and notice a shine off of an egg-shaped artifact near the north cave wall. If you want it, use <T>ake <E>gg.");
+      Room cave2 = new Room ("cave2", "After the debris settles and your vision clears, you see a small opening and decide to investigate.");
+      Room cave3 = new Room ("cave3", "After the debris settles, your vision suddenly goes red.  You swipe at your face trying to clear your vision, then slap at your helmet.  The red cloud morphs into a cylinder with a sharp point and a hand-grip. The cave is otherwise empty about 20 feet in diameter. If you want the object, use <T>ake <R>ag.");
+      Room cave4 = new Room ("cave4", "After stowing the red mercury stuff in your bag, you enter the room to see glowing crystals..diamonds!..arranged in the wall of the coral with points radially aimed at a glowing doughnut-shaped ring laying in the middle of the cave floor. If you want it, use <T>ake <D>oughnut.");
 
       Item egg = new Item ("egg", "Chrome-plated egg-shape device with ...Buttons!",
-        "You pick it up and turn it over in your hands. You accidentally brush one of the buttons and are knocked into the cave wall from an explosion that occurred to your right.",
-        "You eye the object with interest but decide to leave it lay. Searching the cave there doesn't appear to be any other opening. Suddenly you hear a whine coming from the device and a rocking explosion pushes you back.  On the cave wall appears to be an opening a few feet across in front of you. The device is no where to be seen.",
+        "You pick it up and turn it over in your hands. You accidentally brush one of the buttons and are knocked into the cave wall from an explosion that occurred to the north.",
+        "You eye the object with interest but decide to leave it lay. Searching the cave there doesn't appear to be any other opening. Suddenly you hear a whine coming from the device and a rocking explosion pushes you back.  On the cave wall appears to be an opening a few feet across in front of you. The device is no where to be seen. You're facing North.",
         false);
 
       Item red_rag = new Item ("red_rag", "Mysterious red cloth, flows like mercury, solidifies into weapon when you thwack it.",
@@ -58,16 +58,32 @@ Player monty = new Player(0);
       cave3.Items.Add (red_rag);
       cave4.Items.Add (doughnut);
 
+      //directions
       chasm.directions.Add("down", cave1);
-      cave1.directions.Add("east", chasm);
-      cave1.directions.Add("west", cave2);
+
+      cave1.directions.Add("east", cave4);
+      cave1.directions.Add("west", chasm);
       cave1.directions.Add("south", cave1);
-      cave2.directions.Add("west", cave1);
-      cave2.directions.Add("south", cave3);
-      cave3.directions.Add("north", cave2);
-      cave3.directions.Add("west", cave4);
-      cave4.directions.Add("east", cave3);
-      cave4.directions.Add("north", cave1);
+      cave1.directions.Add("north", cave2);
+      cave1.directions.Add("down", cave1);
+
+      cave2.directions.Add("east", cave3);
+      cave2.directions.Add("west", cave2);
+      cave2.directions.Add("south", cave1);
+      cave2.directions.Add("north", cave2);
+      cave2.directions.Add("down", cave2);
+      
+      cave3.directions.Add("east", cave3);
+      cave3.directions.Add("west", cave2);
+      cave3.directions.Add("south", cave4);
+      cave3.directions.Add("north", cave3);
+      cave3.directions.Add("down", cave3);
+
+      cave4.directions.Add("east", cave4);
+      cave4.directions.Add("west", cave1);
+      cave4.directions.Add("south", cave4);
+      cave4.directions.Add("north", cave3);
+      cave4.directions.Add("down", cave4);
 
       CurrentRoom = chasm;
       CurrentPlayer = monty;
@@ -114,7 +130,7 @@ Mission: After you are kitted out, conduct the dive from the survey/research ves
     }
 
     public void DrawHelp () {
-      Console.Clear ();
+      
       System.Console.WriteLine ($@"
                       /~~~~~~~~~~~~~~~~~~~~~/
                      / Surviving Vanuatu!  /

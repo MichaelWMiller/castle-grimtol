@@ -35,11 +35,14 @@ namespace CastleGrimtol.Project {
 
     public Item TakeItem(string itemName) {
       Item foundItem = Items.Find(i => i.Name == itemName);
+      Console.Clear();
        System.Console.WriteLine ($@"
             You have taken the item!
             
             {foundItem.Description}         
                                     ");
+      
+                                    
       
       return foundItem;
     }

@@ -132,6 +132,7 @@ Mission: After you are kitted out, conduct the dive from the survey/research ves
 				
     -  'use <itemName>' Uses an item in a room or from your inventory
 		    Possible items: 'egg', 'red_rag', 'doughnut'
+    -  'drop <itemName>' Don't use or ignore the item in the room.
 		    Example: 'use egg' 
 	      Generally use items as they are presented.
     -  'quit' ...  Quits the Game
@@ -171,6 +172,15 @@ Mission: After you are kitted out, conduct the dive from the survey/research ves
       }
       AlterRoom (item);
     }
+    public void DontUseItem(string itemName) {
+      var item = CurrentPlayer.Inventory.Find(i=> i.Name == itemName);
+      if (item == null)
+      {
+        CurrentRoom.GetDescription();
+        // item.ItemUsed = false;
+        AlterRoomItemNotUsed();
+      }
+    }
     private void AlterRoom (Item item) {
       if (item.Name == "egg" && CurrentRoom.Name == "cave1") {
         System.Console.WriteLine (item.ItemUsedDescription);
@@ -194,7 +204,43 @@ Mission: After you are kitted out, conduct the dive from the survey/research ves
 
 ");
      }
+   
     }
+  private void AlterRoomItemNotUsed() {
+       if (CurrentRoom.Name == "cave1") {
+          var egg = CurrentRoom.Items.Find (i => i.Name == "egg");
+         System.Console.WriteLine(egg.ItemNotUsedDescription);
+         CurrentRoom.directions.Add("north", _rooms.Find(r => r.Name=="cave2"));
+       }
+       if (CurrentRoom.Name == "cave3") {
+         var red_rag = CurrentRoom.Items.Find(i => i.Name=="red_rag");
+         System.Console.WriteLine(red_rag.ItemNotUsedDescription);
+         //CurrentRoom.directions.Add ("south", _rooms.Find (r => r.Name == "cave4"));
+         System.Console.WriteLine($@"
+             /~~~~~~~~~~~~~~~~~~~~~~~~~~~/\
+            /     Y O U  L O S E ! !    /~~\
+           /~~~~~~~~~~~~~~~~~~~~~~~~~~~/~~~~\
+           \                           \~~~~/
+            \   Thanks for Playing!     \~~/
+             \~~~~~~~~~~~~~~~~~~~~~~~~~~~\/
+         
+         ");
+         }
+      if (CurrentRoom.Name == "cave4"){
+           var doughnut = CurrentRoom.Items.Find(i => i.Name=="doughnut");
+         System.Console.WriteLine(doughnut.ItemNotUsedDescription);
+         System.Console.WriteLine($@"
+             /~~~~~~~~~~~~~~~~~~~~~~~~~~~/\
+            /     Y O U  L O S E ! !    /~~\
+           /~~~~~~~~~~~~~~~~~~~~~~~~~~~/~~~~\
+           \                           \~~~~/
+            \   Thanks for Playing!     \~~/
+             \~~~~~~~~~~~~~~~~~~~~~~~~~~~\/
+         
+         ");
+         }
+     }
+    
 
     public void Go (string direction) {
       if (CurrentRoom.directions.ContainsKey (direction)) {

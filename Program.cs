@@ -31,8 +31,11 @@ namespace CastleGrimtol.Project {
                     case "use":
                         game.UseItem (options);
                         break;
+                    case "drop":
+                        game.DontUseItem (options);
+                        break;
                     case "look":
-                        Console.Clear();
+                        Console.Clear ();
                         game.CurrentRoom.GetDescription ();
                         break;
                     case "inventory":
@@ -49,9 +52,9 @@ namespace CastleGrimtol.Project {
                         }
                         game.Prompt ();
                         break;
-                        case "help":
-                        game.DrawHelp();
-                        game.Prompt();
+                    case "help":
+                        game.DrawHelp ();
+                        game.Prompt ();
                         break;
                     case "quit":
 
@@ -64,14 +67,23 @@ namespace CastleGrimtol.Project {
                         gameOver = true;
                         break;
                     default:
-                    game.DrawHelp();
-                    game.Prompt();
-                    break;
+                        game.DrawHelp();
+                        game.Prompt();
+                        break;
                 }
+                //     var egg = game.CurrentPlayer.Inventory.Find (i => i.Name == "egg");
+                //     var red_rag = game.CurrentPlayer.Inventory.Find(i => i.Name == "red_rag");
+                //     var doughnut = game.CurrentPlayer.Inventory.Find(i=> i.Name == "doughnut");
 
-            }
+                //    var room = game.CurrentRoom.Name;
+                //    if (room == "cave1" && egg != null && !egg.ItemUsed)
+                //    {
+                //        System.Console.WriteLine(egg.ItemNotUsedDescription);
+                //         game.CurrentRoom.directions.Add(north, )
+                //    }
 
-        } //Main{
+            } //Main{
 
+        }
     }
 }

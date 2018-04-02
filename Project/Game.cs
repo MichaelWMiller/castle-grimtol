@@ -66,7 +66,7 @@ namespace CastleGrimtol.Project {
 
       //cave3.directions.Add ("east", cave3);
       //cave3.directions.Add ("west", cave3);
-      cave3.directions.Add ("south", cave4);
+      //cave3.directions.Add ("south", cave4);
       //cave3.directions.Add ("north", cave3);
       //cave3.directions.Add ("down", cave3);
 
@@ -165,7 +165,7 @@ Mission: After you are kitted out, conduct the dive from the survey/research ves
           You decide to use the item {item.Name}.
           Action:  
         ");
-
+        CurrentPlayer.Inventory.Add(item);
          CurrentRoom.GetDescription();        
         item.ItemUsed = false;
       }

@@ -7,6 +7,8 @@ namespace CastleGrimtol.Project {
         public static void Main (string[] args) {
             bool gameOver = false;
             string userInput = "";
+            bool itemDropped = false;
+            bool doughnutUsed = false;
             Game game = new Game ();
             game.Setup ();
 
@@ -30,9 +32,15 @@ namespace CastleGrimtol.Project {
                         break;
                     case "use":
                         game.UseItem (options);
+                        if (options == "doughnut") {
+                            doughnutUsed = true;
+                        }
                         break;
                     case "drop":
                         game.DontUseItem (options);
+                        if (options == "red_rag" || options == "doughnut") {
+                            itemDropped = true;
+                        }
                         break;
                     case "look":
                         Console.Clear ();
@@ -71,16 +79,13 @@ namespace CastleGrimtol.Project {
                         game.Prompt();
                         break;
                 }
-                //     var egg = game.CurrentPlayer.Inventory.Find (i => i.Name == "egg");
-                //     var red_rag = game.CurrentPlayer.Inventory.Find(i => i.Name == "red_rag");
-                //     var doughnut = game.CurrentPlayer.Inventory.Find(i=> i.Name == "doughnut");
 
-                //    var room = game.CurrentRoom.Name;
-                //    if (room == "cave1" && egg != null && !egg.ItemUsed)
-                //    {
-                //        System.Console.WriteLine(egg.ItemNotUsedDescription);
-                //         game.CurrentRoom.directions.Add(north, )
-                //    }
+                if ((options == "red_rag" || options == "doughnut") && (itemDropped)) {
+                    gameOver = true;
+                }
+                if (doughnutUsed) {
+                    gameOver = true;
+                }
 
             } //Main{
 

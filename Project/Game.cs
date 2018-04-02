@@ -9,9 +9,11 @@ namespace CastleGrimtol.Project {
     public Player CurrentPlayer { get; set; }
     private List<Room> _rooms { get; set; } = new List<Room> ();
 
-    public void Reset () {
+      public void Reset () {
 
     }
+
+    
 
     public void Setup () {
 
@@ -19,10 +21,10 @@ namespace CastleGrimtol.Project {
       Player monty = new Player (0);
 
       Room chasm = new Room ("chasm", "You are equipped for the long duration dive and are being lowered into inky blackness. Several minutes --and 40 feet into the dive with the stranded Cargador de Mar looming overhead--you glance down and see a phosphurescent glow below you getting brighter.");
-      Room cave1 = new Room ("cave1", "The glow is stronger and you are lowered even with a coral cave opening 10 feet across with no other openings.  You shine your light and notice a shine off of an egg-shaped artifact near the north cave wall. If you want it, 'use egg'.");
+      Room cave1 = new Room ("cave1", "The glow is stronger and you are lowered even with a coral cave opening 10 feet across with no other openings.  You shine your light and notice a shine off of an egg-shaped artifact near the north cave wall. If you want it, 'use egg'. If you don't: drop egg");
       Room cave2 = new Room ("cave2", "After the debris settles and your vision clears, you see a small opening and decide to investigate.");
-      Room cave3 = new Room ("cave3", "After the debris settles, your vision suddenly goes red.  You swipe at your face trying to clear your vision, then slap at your helmet.  The red cloud morphs into a cylinder with a sharp point and a hand-grip. The cave is otherwise empty about 20 feet in diameter. If you want the object, 'use red_rag'.");
-      Room cave4 = new Room ("cave4", "After stowing the red mercury stuff in your bag, you enter the room to see glowing crystals..diamonds!..arranged in the wall of the coral with points radially aimed at a glowing doughnut-shaped ring laying in the middle of the cave floor. If you want it, 'use doughnut'.");
+      Room cave3 = new Room ("cave3", "After the debris settles, your vision suddenly goes red.  You swipe at your face trying to clear your vision, then slap at your helmet.  The red cloud morphs into a cylinder with a sharp point and a hand-grip. The cave is otherwise empty about 20 feet in diameter. If you want the object, 'use red_rag'. If not, 'drop red_rag'");
+      Room cave4 = new Room ("cave4", "After stowing the red mercury stuff in your bag, you enter the room to see glowing crystals..diamonds!..arranged in the wall of the coral with points radially aimed at a glowing doughnut-shaped ring laying in the middle of the cave floor. If you want it, 'use doughnut'. If not 'drop doughnut'");
       _rooms.Add (chasm);
       _rooms.Add (cave1);
       _rooms.Add (cave2);
@@ -59,7 +61,7 @@ namespace CastleGrimtol.Project {
       //cave1.directions.Add ("down", cave1);
 
       cave2.directions.Add ("east", cave3);
-      cave2.directions.Add ("west", cave2);
+      //cave2.directions.Add ("west", cave2);
       //cave2.directions.Add ("south", cave1);
       //cave2.directions.Add ("north", cave2);
       //cave2.directions.Add ("down", cave2);
@@ -206,7 +208,7 @@ Mission: After you are kitted out, conduct the dive from the survey/research ves
      }
    
     }
-  private void AlterRoomItemNotUsed() {
+  private void  AlterRoomItemNotUsed() {
        if (CurrentRoom.Name == "cave1") {
           var egg = CurrentRoom.Items.Find (i => i.Name == "egg");
          System.Console.WriteLine(egg.ItemNotUsedDescription);

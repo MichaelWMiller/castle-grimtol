@@ -184,11 +184,11 @@ Mission: After you are kitted out, conduct the dive from the survey/research ves
       }
     }
     private void AlterRoom (Item item) {
-      if (item.Name == "egg" && CurrentRoom.Name == "cave1") {
+      if (item.Name == "egg" && CurrentRoom.Name == "cave1" && !CurrentRoom.directions.ContainsKey("north")) {
         System.Console.WriteLine (item.ItemUsedDescription);
        CurrentRoom.directions.Add ("north", _rooms.Find (r => r.Name == "cave2"));
       }
-      if (item.Name == "red_rag" && CurrentRoom.Name == "cave3")
+      if (item.Name == "red_rag" && CurrentRoom.Name == "cave3" && !CurrentRoom.directions.ContainsKey("south"))
      { 
        System.Console.WriteLine(item.ItemUsedDescription);
       CurrentRoom.directions.Add("south", _rooms.Find (r => r.Name == "cave4"));
